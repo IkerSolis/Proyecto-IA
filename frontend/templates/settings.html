@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 col-lg-4 mx-auto">
+        <h4 class="fw-bold mb-3" style="color: var(--primary-color);">Configuración</h4>
+        <div class="card p-4">
+            <h6 class="fw-bold text-muted mb-3 border-bottom pb-2">Datos de la Empresa</h6>
+            
+            <div class="mb-3">
+                <label class="form-label text-muted small">Nombre / ID</label>
+                <input type="text" class="form-control bg-light" id="set_tenant_name" readonly value="Cargando...">
+            </div>
+            
+            <h6 class="fw-bold text-muted mb-3 border-bottom pb-2 mt-4">Sesión Actual</h6>
+            <div class="mb-4">
+                <label class="form-label text-muted small">Usuario (Email)</label>
+                <input type="text" class="form-control bg-light" id="set_user_email" readonly value="Cargando...">
+            </div>
+            
+            <button class="btn btn-outline-danger w-100 mt-2" onclick="logout()">Cerrar Sesión</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('access_token');
+        if (token) {
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                if (payload.empresa_id) {
+                    document.getElementById('set_tenant_name').value = "Tenant ID: " + payload.empresa_id;
+                    // También actualizar el navbar global
+                    document.getElementById('current_tenant_name').textContent = "Tenant: " + payload.empresa_id.substring(0,8) + "...";
+                }
+                if (payload.email) {
+                    document.getElementById('set_user_email').value = payload.email;
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    });
+</script>
+{% endblock %}

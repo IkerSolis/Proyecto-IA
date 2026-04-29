@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-12 text-center">
+        <h2 class="fw-bold" style="color: var(--primary-color);">Bienvenido a Nexos ERP</h2>
+        <p class="text-muted fs-5 mt-3">Tu sistema de administración centralizado.</p>
+        
+        <div class="d-flex justify-content-center gap-4 mt-5">
+            <a href="{% url 'pos' %}" class="btn btn-primary btn-lg px-5 py-3 shadow-sm rounded-3">
+                <i class="bi bi-cart fs-3 d-block mb-2"></i>
+                Ir a Punto de Venta
+            </a>
+            <a href="{% url 'inventario' %}" class="btn btn-outline-primary btn-lg px-5 py-3 shadow-sm rounded-3 bg-white">
+                <i class="bi bi-table fs-3 d-block mb-2"></i>
+                Ir a Inventario
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
