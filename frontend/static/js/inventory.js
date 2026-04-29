@@ -31,7 +31,7 @@ function renderTable(data) {
     }
 
     data.forEach(prod => {
-        if (!prod.is_active) return; // Solo activos
+        if (prod.estado !== 'activo') return; // Solo activos
 
         const tr = document.createElement('tr');
         // Usar .toFixed() para display

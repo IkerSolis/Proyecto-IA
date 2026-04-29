@@ -25,7 +25,7 @@ async function loadCatalog() {
     try {
         const data = await apiFetch('/catalog/productos/');
         if (data) {
-            catalogData = data.filter(p => p.is_active && p.stock_actual > 0);
+            catalogData = data.filter(p => p.estado === 'activo' && p.stock_actual > 0);
             renderQuickCatalog();
         }
     } catch (error) {
